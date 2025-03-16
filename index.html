@@ -59,7 +59,7 @@
         }
 
         .countdown {
-            font-size: 1.8em;
+            font-size: 0.8em;
             font-weight: bold;
             margin: 20px 0;
             color: #e56b6f; /* Deep coral */
@@ -130,18 +130,19 @@
                 const days = Math.floor(distance / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                document.getElementById('countdown').innerHTML = `Count Down: ${days} Days ${hours} Hours ${minutes} Minutes ⏳`;
+                document.getElementById('countdown').innerHTML = `CountDown: ${days} Days ${hours} Hours ${minutes} Minutes ⏳`;
             }, 1000);
         }
         countdown();
         
         function createConfetti() {
+            const confettiContainer = document.querySelector('.confetti-container');
             for (let i = 0; i < 50; i++) {
                 let confetti = document.createElement('div');
                 confetti.className = 'confetti';
                 confetti.style.left = Math.random() * 100 + 'vw';
                 confetti.style.animationDelay = Math.random() * 5 + 's';
-                document.body.appendChild(confetti);
+                confettiContainer.appendChild(confetti);
             }
         }
         createConfetti();
