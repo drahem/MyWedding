@@ -20,36 +20,46 @@
         body {
             font-family: 'Roboto', sans-serif;
             text-align: center;
-            background-color: #e0f2f7; /* Light teal background */
-            color: #333; /* Dark charcoal gray text */
+            background-color: #e0f2f7;
+            color: #333;
             padding: 20px;
             position: relative;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+        }
+
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh; /* Fixed height for confetti */
             overflow: hidden;
+            z-index: 0;
         }
 
         .container {
             max-width: 600px;
             margin: auto;
-            background-color: #f8f8f0; /* Soft cream background */
+            background-color: #f8f8f0;
             padding: 30px;
             border-radius: 20px;
             box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
             position: relative;
             z-index: 1;
-            border: 2px solid #bc8f8f; /* Rosy brown border */
+            border: 2px solid #bc8f8f;
         }
 
         h1 {
             font-family: 'Dancing Script', cursive;
             font-size: 3.5em;
-            color: #e56b6f; /* Deep coral */
+            color: #e56b6f;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
         }
 
         h2 {
             font-family: 'Dancing Script', cursive;
             font-size: 2.8em;
-            color: #607d8b; /* Slate blue */
+            color: #607d8b;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
         }
 
@@ -59,16 +69,16 @@
         }
 
         .countdown {
-            font-size: 0.8em;
+            font-size: 1.8em;
             font-weight: bold;
             margin: 20px 0;
-            color: #e56b6f; /* Deep coral */
+            color: #e56b6f;
         }
 
         .btn {
             display: inline-block;
             padding: 15px 30px;
-            background: linear-gradient(to bottom, #f08080, #bc8f8f); /* Light coral to rosy brown gradient */
+            background: linear-gradient(to bottom, #f08080, #bc8f8f);
             color: white;
             text-decoration: none;
             border-radius: 10px;
@@ -98,19 +108,30 @@
         }
 
         .confetti:nth-child(even) {
-            background-color: #ffd700; /* Gold */
+            background-color: #ffd700;
         }
 
         .confetti:nth-child(3n) {
-            background-color: #fce4ec; /* Light pink */
+            background-color: #fce4ec;
         }
 
-        confetti:nth-child(5n) {
-            background-color: #b2ebf2; /* light blue */
+        .confetti:nth-child(5n) {
+            background-color: #b2ebf2;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            h1 { font-size: 2.8em; }
+            h2 { font-size: 2.2em; }
+            p { font-size: 1em; }
+            .countdown { font-size: 1.5em; }
+            .btn { padding: 12px 25px; font-size: 1.1em; }
+            .container { padding: 20px; }
         }
     </style>
 </head>
 <body>
+    <div class="confetti-container"></div>
     <div class="container">
         <h1>You're Invited! 🎉</h1>
         <h2>Mohamed & Soha 💖💍</h2>
@@ -122,7 +143,7 @@
     </div>
 
     <script>
-         function countdown() {
+        function countdown() {
             const weddingDate = new Date('2025-04-05 19:00:00').getTime();
             setInterval(function() {
                 const now = new Date().getTime();
@@ -130,14 +151,26 @@
                 const days = Math.floor(distance / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                document.getElementById('countdown').innerHTML = `CountDown: ${days} Days ${hours} Hours ${minutes} Minutes ⏳`;
+                document.getElementById('countdown').innerHTML = `Count Down: ${days} Days ${hours} Hours ${minutes} Minutes ⏳`;
             }, 1000);
         }
         countdown();
-        
+
+        function createConfetti() {
+            const confettiContainer = document.querySelector('.confetti-container');
+            for (let i = 0; i < 50; i++) {
+                let confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.animationDelay = Math.random() * 5 + 's';
+                confettiContainer.appendChild(confetti);
+            }
+        }
+        createConfetti();
+
         function createFloatingElements() {
-            const emojis = ['💍', '❤️', '🎊', '🎉', '🔔', '🌹'];
-            for (let i = 0; i < 24; i++) {
+            const emojis = ['💍', '❤️', '🎊', '🍾', '🔔', '🌹'];
+            for (let i = 0; i < 12; i++) {
                 let floatingEmoji = document.createElement('div');
                 floatingEmoji.className = 'floating';
                 floatingEmoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
